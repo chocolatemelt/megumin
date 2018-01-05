@@ -1,0 +1,8 @@
+{
+  "name": "megumin",
+  "version": "1.0.0",
+  "description": ":MeguFace:",
+  "main": "bot.js",
+  "author": "kev",
+  "dependencies": {}
+}
