@@ -36,8 +36,19 @@ bot.on("message", async message => {
         if (checkMessage[0] === "^addmeme") {
             try {
                 let memeName = checkMessage[1];
+                if (checkMessage[1] === undefined) {
+                    message.channel.send("`^addmeme <command> <text>`");
+                    return null;
+                }
+                if (memeName.indexOf(0) != "^") {
+                    memeName = "^" + memeName;
+                }
                 if (memeName === "^delmeme" || memeName === "^memes" || memeName === "^help" || memeName === "^addmeme") {
                     message.channel.send("idiot");
+                    return null;
+                }
+                if (message.content.split(" ").length < 3) {
+                    message.channel.send("`^addmeme <command> <text>`");
                     return null;
                 }
                 const pivot = message.content.indexOf(" ", message.content.indexOf(" ") + 1);
@@ -56,7 +67,7 @@ bot.on("message", async message => {
                 message.channel.send("custom meme successfully added");
 
             } catch (error) {
-                console.log("Error\nAuthor: " + message.author.username + "\nMessage: " + message.content);
+                console.log("Error: " + error + "\nAuthor: " + message.author.username + "\nMessage: " + message.content);
             }
         } else if (checkMessage[0] === "^delmeme" && message.author.tag === "kev#4712") {
             let memeName = checkMessage[1];
@@ -64,11 +75,11 @@ bot.on("message", async message => {
                 message.channel.send("`^delmeme <command>`");
                 return null;
             }
-            else if (memeName === "^delmeme" || memeName === "^memes" || memeName === "^help" || memeName === "^addmeme") {
+            if (memeName.indexOf(0) != "^") memeName = "^" + memeName;
+            if (memeName === "^delmeme" || memeName === "^memes" || memeName === "^help" || memeName === "^addmeme") {
                 message.channel.send("idiot");
                 return null;
             }
-            if (memeName.indexOf(0) != "^") memeName = "^" + memeName;
             let memeIdx = -1;
             let findMemes = "";
             fs.readFile("./memes/memes.txt", "utf8", function (err, f) {
