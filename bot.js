@@ -10,12 +10,12 @@ bot.on("ready", () => {
     console.log("我が名はめぐみん！");
 });
 
-bot.on("message", message => {
+bot.on("message", async message => {
     if(message.author.bot) return;
 
     if(message.content.startsWith("Rarity: Rare")) {
-        message.react("398962296967397376")
-        message.react("398962692347396099")
+        await message.react("398962296967397376")
+        await message.react("398962692347396099")
     }
 });
 
