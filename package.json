@@ -8,9 +8,11 @@
     "bufferutil": "^3.0.3",
     "discord.js": "^11.2.1",
     "erlpack": "github:hammerandchisel/erlpack",
+    "fs": "0.0.1-security",
     "libsodium-wrappers": "^0.5.4",
     "node-opus": "^0.2.7",
     "opusscript": "0.0.3",
+    "random-js": "^1.0.8",
     "sodium": "^2.0.3",
     "uws": "^0.14.5"
   }
