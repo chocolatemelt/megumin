@@ -37,12 +37,16 @@ bot.on("message", async message => {
             try {
                 let memeName = checkMessage[1];
                 if (memeName === "^memes" || memeName === "^help" || memeName === "^addmeme") {
-                    message.channel.send("you have brain damage");
+                    message.channel.send("idiot");
                     return null;
                 }
-                let memeText = message.content.split("|", 2);
+                const pivot = message.content.indexOf(" ", message.content.indexOf(" ") + 1);
+                let memeText = new Array(2);
+                memeText[0] = message.content.split(" ")[1];
+                memeText[1] = message.content.substring(pivot);
+                console.log(memeText);
                 if (memeText[1] === undefined) {
-                    message.channel.send("you have brain damage");
+                    message.channel.send("`^addmeme <command> <text>`");
                     return null;
                 }
                 if (memeName.charAt(0) === "^") {
