@@ -1,6 +1,6 @@
 const discord = require("discord.js")
 const auth = require("./auth.json")
-const fs = require('fs');
+const fs = require("fs");
 const random = require("random-js")();
 const bot = new discord.Client();
 
@@ -24,31 +24,31 @@ bot.on("message", async message => {
     } else {
         // custom memes, borrowed heavily from https://github.com/iArePJ/CommandBot
         let checkMessage = message.content.split(" ");
-        if (checkMessage[0] === '^creatememe') {
+        if (checkMessage[0] === "^addmeme") {
             try {
                 let memeName = checkMessage[1];
-                if (memeName === '^memes' || memeName === '^help') {
-                    message.channel.send("You can't do that.");
+                if (memeName === "^memes" || memeName === "^help" || memeName === "^addmeme") {
+                    message.channel.send("you have brain damage");
                     return null;
                 }
-                let memeText = message.content.split('|', 2);
+                let memeText = message.content.split("|", 2);
                 if (memeText[1] === undefined) {
-                    message.channel.send("You forgot to use '|'");
+                    message.channel.send("you have brain damage");
                     return null;
                 }
-                if (memeName.charAt(0) === '^') {
+                if (memeName.charAt(0) === "^") {
                     checkExistingMeme(memeText[1], memeName);
                 } else {
-                    checkExistingMeme(memeText[1], '^' + memeName);
+                    checkExistingMeme(memeText[1], "^" + memeName);
                 }
-                message.channel.send("Meme " + memeName + " has been created.");
+                message.channel.send("custom meme successfully added");
 
             } catch (error) {
                 console.log("Error\nAuthor: " + message.author.username + "\nMessage: " + message.content);
             }
         }
 
-        fs.readFile('./memes/memes.txt', 'utf8', function (err, f) {
+        fs.readFile("./memes/memes.txt", "utf8", function (err, f) {
             let com = f.toString().split(";");
             for (i = 0; i < com.length; i++) {
                 if (message.content === com[i]) {
@@ -57,11 +57,11 @@ bot.on("message", async message => {
                         break;
                     }
                     if (com[i] === "^help") {
-                        message.channel.send("How to create memes:\n^creatememe ^NameOfMeme | Type whatever you want here");
+                        message.channel.send("^addmeme ^help ^memes");
                         break;
                     }
                     let meme = "./memes/" + com[i] + ".txt";
-                    fs.readFile(meme, 'utf8', function (err, f) {
+                    fs.readFile(meme, "utf8", function (err, f) {
                         try {
                             let com2 = f.toString().split(";");
                             let num = random.integer(0, com2.length - 1);
@@ -79,7 +79,7 @@ bot.on("message", async message => {
 
 function checkExistingMeme(memeText, memeName) {
     let memeExists = false;
-    fs.readFile('./memes/memes.txt', 'utf8', function (err, f) {
+    fs.readFile("./memes/memes.txt", "utf8", function (err, f) {
         let findMemes = f.toString().split(";");
         for (i = 0; i < findMemes.length; i++) {
             if (memeName === findMemes[i]) {
@@ -104,7 +104,7 @@ function createMeme(memeText, memeExists, memeName) {
             }
         });
     } else if (memeExists === false) {
-        fs.appendFile('./memes/memes.txt', memeName + ';', (err) => {
+        fs.appendFile("./memes/memes.txt", memeName + ";", (err) => {
             if (err) throw err;
         });
 
