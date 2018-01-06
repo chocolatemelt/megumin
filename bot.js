@@ -61,7 +61,7 @@ bot.on("message", async message => {
             }
         } else if (checkMessage[0] === "^delmeme") {
             let memeName = checkMessage[1];
-            console.log("xd");
+            if (memeName.indexOf(0) != "^") memeName = "^" + memeName;
             if (memeName === undefined) {
                 message.channel.send("`^delmeme <command>`");
                 return null;
@@ -81,13 +81,13 @@ bot.on("message", async message => {
                 }
                 if (memeIdx > -1) {
                     findMemes.splice(memeIdx, 1);
-                    console.log(findMemes);
-                    message.channel.send("successfully deleted " + checkMessage[1]);
+                    fs.unlinkSync("./memes/" + memeName + ".txt");
                     fs.writeFile("./memes/memes.txt", findMemes.join(";"), function (err) {
                         if (err) {
                             return console.err(err);
                         }
                     });
+                    message.channel.send("successfully deleted " + checkMessage[1]);
                 } else {
                     message.channel.send("not found");
                 }
