@@ -11,16 +11,11 @@ bot.on("ready", () => {
 });
 
 bot.on("message", message => {
-    if (message.author.bot) return;
+    if(message.author.bot) return;
 
-    if (message.content.indexOf("!") === 0) {
-        var text = message.content.substring(1);
-
-        message.reply(reversed).then(function (message) {
-            message.react("398962296967397376")
-            message.react("398962692347396099")
-        }).catch(function() {
-        });
+    if(message.content.startsWith("Rarity: Rare")) {
+        message.react("398962296967397376")
+        message.react("398962692347396099")
     }
 });
 
