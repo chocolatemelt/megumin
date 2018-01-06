@@ -15,7 +15,7 @@ bot.on("ready", () => {
         f = f.replace(/(\r\n|\n|\r)/gm, "");
         fs.writeFile('./memes/memes.txt', f, "", function (err) {
             if (err) {
-                console.log(err);
+                console.err(err);
             }
         });
     });
@@ -44,7 +44,6 @@ bot.on("message", async message => {
                 let memeText = new Array(2);
                 memeText[0] = message.content.split(" ")[1];
                 memeText[1] = message.content.substring(pivot);
-                console.log(memeText);
                 if (memeText[1] === undefined) {
                     message.channel.send("`^addmeme <command> <text>`");
                     return null;
@@ -59,9 +58,8 @@ bot.on("message", async message => {
             } catch (error) {
                 console.log("Error\nAuthor: " + message.author.username + "\nMessage: " + message.content);
             }
-        } else if (checkMessage[0] === "^delmeme") {
+        } else if (checkMessage[0] === "^delmeme" && message.author.tag === "kev#4712") {
             let memeName = checkMessage[1];
-            if (memeName.indexOf(0) != "^") memeName = "^" + memeName;
             if (memeName === undefined) {
                 message.channel.send("`^delmeme <command>`");
                 return null;
@@ -70,6 +68,7 @@ bot.on("message", async message => {
                 message.channel.send("idiot");
                 return null;
             }
+            if (memeName.indexOf(0) != "^") memeName = "^" + memeName;
             let memeIdx = -1;
             let findMemes = "";
             fs.readFile("./memes/memes.txt", "utf8", function (err, f) {
