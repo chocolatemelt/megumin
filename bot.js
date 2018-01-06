@@ -10,6 +10,15 @@ const token = auth.token;
 // explosions
 bot.on("ready", () => {
     console.log("我が名はめぐみん！");
+    // clean up memes file
+    fs.readFile('./memes/memes.txt', 'utf8', function (err, f) {
+        f = f.replace(/(\r\n|\n|\r)/gm, "");
+        fs.writeFile('./memes/memes.txt', f, "", function (err) {
+            if (err) {
+                console.log(err);
+            }
+        });
+    });
 });
 
 // asynchronously respond and react to messages
