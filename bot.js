@@ -3,7 +3,7 @@ const discord = require('discord.js')
 const auth = require('./auth.json')
 
 // Create an instance of Discord that we will use to control the bot
-const bot = new Discord.Client();
+const bot = new discord.Client();
 
 // Token for your bot, located in the Discord application console - https://discordapp.com/developers/applications/me/
 const token = auth.token;
