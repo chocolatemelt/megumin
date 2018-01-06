@@ -1,6 +1,6 @@
 // Import the discord.js module
-const discord = require('discord.js')
-const auth = require('./auth.json')
+const discord = require("discord.js")
+const auth = require("./auth.json")
 
 // Create an instance of Discord that we will use to control the bot
 const bot = new discord.Client();
@@ -9,22 +9,22 @@ const bot = new discord.Client();
 const token = auth.token;
 
 // Gets called when our bot is successfully logged in and connected
-bot.on('ready', () => {
-    console.log('我が名はめぐみん！');
+bot.on("ready", () => {
+    console.log("我が名はめぐみん！");
 });
 
 // Event to listen to messages sent to the server where the bot is located
-bot.on('message', message => {
+bot.on("message", message => {
     // So the bot doesn't reply to iteself
     if (message.author.bot) return;
 
     // Check if the message starts with the `!` trigger
-    if (message.content.indexOf('!') === 0) {
-        // Get the user's message excluding the `!`
+    if (message.content.indexOf("!") === 0) {
+        // Get the user"s message excluding the `!`
         var text = message.content.substring(1);
 
         // Reverse the message
-        var reversed = '';
+        var reversed = "";
         var i = text.length;
 
         while (i > 0) {
