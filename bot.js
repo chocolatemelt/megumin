@@ -24,10 +24,10 @@ bot.on("ready", () => {
 // asynchronously respond and react to messages
 bot.on("message", async message => {
     // obviously don't want to infinite combo
-    if(message.author.bot) return;
+    if (message.author.bot) return;
 
     // standard poe prefix
-    if(message.content.startsWith("Rarity: Rare")) {
+    if (message.content.startsWith("Rarity: Rare")) {
         await message.react("398962296967397376")
         await message.react("398962692347396099")
     } else {
@@ -36,7 +36,7 @@ bot.on("message", async message => {
         if (checkMessage[0] === "^addmeme") {
             try {
                 let memeName = checkMessage[1];
-                if (memeName === "^memes" || memeName === "^help" || memeName === "^addmeme") {
+                if (memeName === "^delmeme" || memeName === "^memes" || memeName === "^help" || memeName === "^addmeme") {
                     message.channel.send("idiot");
                     return null;
                 }
@@ -59,6 +59,39 @@ bot.on("message", async message => {
             } catch (error) {
                 console.log("Error\nAuthor: " + message.author.username + "\nMessage: " + message.content);
             }
+        } else if (checkMessage[0] === "^delmeme") {
+            let memeName = checkMessage[1];
+            console.log("xd");
+            if (memeName === undefined) {
+                message.channel.send("`^delmeme <command>`");
+                return null;
+            }
+            else if (memeName === "^delmeme" || memeName === "^memes" || memeName === "^help" || memeName === "^addmeme") {
+                message.channel.send("idiot");
+                return null;
+            }
+            let memeIdx = -1;
+            let findMemes = "";
+            fs.readFile("./memes/memes.txt", "utf8", function (err, f) {
+                findMemes = f.toString().split(";");
+                for (i = 0; i < findMemes.length; i++) {
+                    if (memeName === findMemes[i]) {
+                        memeIdx = i;
+                    }
+                }
+                if (memeIdx > -1) {
+                    findMemes.splice(memeIdx, 1);
+                    console.log(findMemes);
+                    message.channel.send("successfully deleted " + checkMessage[1]);
+                    fs.writeFile("./memes/memes.txt", findMemes.join(";"), function (err) {
+                        if (err) {
+                            return console.err(err);
+                        }
+                    });
+                } else {
+                    message.channel.send("not found");
+                }
+            });
         }
 
         fs.readFile("./memes/memes.txt", "utf8", function (err, f) {
@@ -70,7 +103,7 @@ bot.on("message", async message => {
                         break;
                     }
                     if (com[i] === "^help") {
-                        message.channel.send("^addmeme ^help ^memes");
+                        message.channel.send("^addmeme ^delmeme ^help ^memes");
                         break;
                     }
                     let meme = "./memes/" + com[i] + ".txt";
