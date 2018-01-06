@@ -10,7 +10,7 @@ const token = auth.token;
 
 // Gets called when our bot is successfully logged in and connected
 bot.on('ready', () => {
-    console.log('Hello World!');
+    console.log('我が名はめぐみん！');
 });
 
 // Event to listen to messages sent to the server where the bot is located
@@ -33,7 +33,11 @@ bot.on('message', message => {
         }
 
         // Reply to the user's message
-        message.reply(reversed);
+        message.reply(reversed).then(function (message) {
+            message.react("398962296967397376")
+            message.react("398962692347396099")
+        }).catch(function() {
+        });
     }
 });
 
