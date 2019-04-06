@@ -28,8 +28,8 @@ bot.on("message", async message => {
 
     // standard poe prefix
     if (message.content.startsWith("Rarity: Rare")) {
-        await message.react("398962296967397376")
-        await message.react("398962692347396099")
+        await message.react("563890933033074688")
+        await message.react("563890949017567242")
     } else {
         // custom memes, borrowed heavily from https://github.com/iArePJ/CommandBot
         let checkMessage = message.content.split(" ");
