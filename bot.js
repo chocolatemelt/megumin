@@ -30,6 +30,12 @@ bot.on("message", async message => {
     if (message.content.startsWith("Rarity: Rare")) {
         await message.react("563890933033074688")
         await message.react("563890949017567242")
+    } else if (message.content.startsWith("^jail")) {
+        const jail = bot.emojis.get("563895035138015234")
+        message.channel.send(jail.toString())
+    } else if (message.content.startsWith("^popcorn")) {
+        const popcorn = bot.emojis.get("563898386370134026")
+        message.channel.send(popcorn.toString())
     } else {
         // custom memes, borrowed heavily from https://github.com/iArePJ/CommandBot
         let checkMessage = message.content.split(" ");
